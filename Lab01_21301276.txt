@@ -1,0 +1,175 @@
+Name: Nowshin Sumaiya
+ID: 21301276
+Section: 09
+Course: CSE220
+Assignment: 01
+
+
+#task 1
+
+def shift_left(source_1, k) :
+  for a in range(k) :
+    for b in range(len(source_1)-1) :
+      source_1[b] = source_1[b+1]
+    source_1[-1] = 0
+  print(source_1)
+
+source_1 = [10,20,30,40,50,60]
+shift_left(source_1, 3)
+
+
+#task 2
+
+def rotate_left(source_1, k) :
+  for a in range(k) :
+    temp_1 = source_1[0]
+    for b in range(len(source_1)-1) :
+      source_1[b] = source_1[b+1]
+    source_1[-1] = temp_1
+  print(source_1)
+
+source_1=[10,20,30,40,50,60]
+rotate_left(source_1,3)
+
+#task 3
+
+def shift_right(source_1, k) :
+  for a in range(k) :
+    for b in range(len(source_1)-1, 0,-1) :
+      source_1[b] = source_1[b-1]
+    source_1[0] = 0
+  print(source_1)
+
+source_1=[10,20,30,40,50,60]
+shift_right(source_1,3)
+
+#task 4
+
+def rotate_right(source_1, k) :
+  for a in range(k) :
+    temp_1 = source_1[-1]
+    for b in range(len(source_1)-1, 0,-1) :
+      source_1[b] = source_1[b-1]
+    source_1[0] = temp_1
+  print(source_1)
+
+source_1=[10,20,30,40,50,60]
+rotate_right(source_1,3)
+
+#task 5
+
+def remove(source_1, size, indx) :
+  for a in range(indx, size) :
+    source_1[a] = source_1[a+1]
+  source_1[size-1] = 0
+  print (source_1)
+
+source_1=[10,20,30,40,50,0,0]
+remove(source_1,5,2)
+
+#task 6
+
+def remove_all(source_1,size,ele) :
+
+  for a in range(size) :
+    if source_1[a] == ele :
+      for a in range(a,size) :
+        source_1[a] = source_1[a+1]
+        source_1[size-1] = 0
+    
+    else:
+      source_1[a] = source_1[a]    
+  print(source_1)
+
+source_1=[10,2,30,2,50,2,2,0,0]
+remove_all(source_1,7,2)
+
+#task 7
+
+def splitting_an_array(source_1) :
+   
+  for a in range(len(source_1)-1) :
+    left_S = 00
+    right_S = 00
+    
+    for b  in range(0, a+1) :
+      left_S = left_S + source_1[b]
+    for c in range(len(source_1)-1, a, -1) :
+      right_S= right_S + source_1[c]
+
+    if a == len(source_1)-2 :
+      return False
+    elif right_S == left_S :
+      return True  
+
+source_1 =  [2, 1, 1, 2, 1] 
+print(splitting_an_array(source_1))  
+
+#task 8
+
+def array_series (n):
+  index=00
+  array=[0]*n *n
+  
+  for a in range(1, n+1) :
+    for b in range(1, n-a+1) :
+      index=index+1
+    
+    for c in range(a, 0, -1) :
+      array[index]= c
+      index=index+1
+  print (array)      
+
+
+n= int(input('enter a number :'))
+array_series(n)
+
+
+#task 9 
+def max_bunch(source1_array) :
+  max_store =0
+  max_count =0
+  
+  for a in range(len(source1_array)-1) :
+    if source1_array[a] ==source1_array[a+1] :
+      max_count=max_count +1
+    else:
+      max_count=1
+
+    if (max_count > max_store) :
+      max_store = max_count
+  print(max_store)
+
+source1_array = [1, 2, 2, 3, 4, 4, 4]
+max_bunch(source1_array)
+
+#task 10
+
+def array_repitition(source) :
+    cou=[]
+    num_list=[]
+    
+    for a in range(len(source)) :
+      if source[a] not in num_list :
+          num_list=num_list+[source[a]]
+      else:
+        continue    
+    
+    for b in num_list : 
+      value=00
+      for c in source :
+        if c==b :
+          value=value+1
+      cou=cou+[value]
+    for x in range(len(cou)) :
+      if cou[x]==1:
+        continue
+      else:  
+        for y in range(x+1,len(cou)) :
+            if cou[x]==cou[y] :
+              return (True)
+    return (False)
+
+
+source = [4,5,6,6,4,3,6,4]   
+print(array_repitition(source))

@@ -1,0 +1,218 @@
+Name Nowshin Sumaiya
+ID 21301276
+Section 09
+Course CSE220
+Assignment 05
+
+#Task 01 (a)
+def find_fact(n) :
+  if (n ==0 or n ==1) :
+    return 1
+  
+  else:  
+    return n *find_fact(n-1)
+ 
+print('The factorial is',find_fact(7))
+
+
+#Task 01 (b)
+def fibonacci_number(n):
+  if (n== 0) :
+    return 0
+  
+  if (n== 1) :
+    return 1
+    
+  else:
+    return fibonacci_number (n-1) + fibonacci_number(n-2)
+
+print('The fibonacci number is',fibonacci_number(0))
+
+
+#Task 01 (c)
+def printArray(array_1,x) :
+  
+  if (x<len(array_1)) :
+    print(array_1[x])
+    
+    return printArray (array_1, x+1)
+
+  else:
+    pass 
+
+array_1=[-1,0,3,7,90,1000]
+printArray(array_1,0)   
+
+
+#Task 01 (d)
+def powerN (base_1,n) :
+  
+  if(n>0) :
+    return base_1*powerN (base_1,n-1)
+  
+  else :
+    return 1  
+print("The ans is",powerN(3,3))  
+
+
+#Task 02 (a)
+def decToBinary(num) :
+  if (num == 0) :
+    return str (0)
+  else:
+    return  decToBinary (num//2 ) + str(( num % 2) )
+
+print(decToBinary(10))
+ 
+
+#Task 02 (b,c)
+class Node:
+  def __init__( self, element, next) :
+    self.element = element
+    self.next = next
+#--------------------------------------------------------
+class Linked_List:
+  def __init__(self, x) :
+    self.head = None
+    
+    if(type(x)==list):
+      self.head=Node(x[0],None)
+      start_1=self.head
+      
+      for a in range(1,len(x)):
+        store=Node(x[a],None)
+        start_1.next=store
+        start_1=start_1.next   
+    
+    elif(type(x)==Node):
+      self.head=x
+
+#------------------------------------------------------------
+  def added_1(self,head) :      
+    if(head!=None) :
+      return head.element+ self.added_1(head.next)
+    
+    else:
+      return 0
+
+#-------------------------------------------------------  
+  def print_list(self,head) :     
+    if(head !=None) :
+      
+      self.print_list (head.next )
+      print(head.element )
+    
+    else:
+      pass    
+#---------------------------------------------------    
+obj_1 = [10, 20, 30, 40]
+temp_1 = Linked_List(obj_1)
+
+print("Total:",temp_1.added_1  (temp_1.head) )
+temp_1.print_list(temp_1.head)
+
+
+#Task 03
+def hoc_Builder(lev):
+  
+  if (lev == 0) :
+    return "invalid"
+  
+  if (lev == 1) :
+    return 8
+  
+  else:
+    return 5 + hoc_Builder(lev - 1)
+
+print("The ans is",hoc_Builder(1))
+
+
+
+
+#Task 04 (a)
+def print_patt(num) :
+  if(num == 0):
+    return 0
+  
+  else:
+    print_patt(num-1)
+  
+  pattern_1(num)
+  print()
+
+def pattern_1(num) :
+  if (num == 0) :
+    return 0
+  
+  else :
+    pattern_1 (num-1)
+    print (num, end='  ')
+
+print_patt(5)
+
+
+#Task 04 (b)
+def print_patt (num, x) :
+  if (num == 0) :
+    return 0
+  
+  else:
+    spc(num-1)
+    pattern_1(x- num+1)
+    
+    print()
+    print_patt(num-1, x)
+
+def pattern_1 ( num) :
+  if (num == 0) :
+    return 0
+  
+  else:
+    pattern_1 ( num-1)
+    print (num, end='   ')
+
+def spc ( num) :
+  if (num == 0) :
+    return 0
+  
+  else:
+    spc(num-1)
+    
+    print(' ', end = '   ')
+
+print_patt(5, 5)
+
+
+
+#task 05
+class FinalQ: 
+ 
+ def print(self,array,idx): 
+  if(idx<len(array)): 
+    profit = self.calcProfit(array[idx])
+    #TO DO 
+
+    print(f'{idx+1 }. Investment: {array[idx] } ;  Profit: {profit }' )
+    return self.print (array,idx+1 )
+  
+  else:
+    pass
+
+ def calcProfit(self,investment) : 
+  #TO DO 
+  if(investment > 100000):
+    
+    return 80+self.calcProfit (investment- 1000)   
+  
+
+  if(investment <= 25000) :
+    return 0.0
+   
+  if(investment <= 100000) :
+    return 45+ self.calcProfit (investment- 1000)
+
+#-----------------------------------------------
+#Tester 
+array=[25000,100000,250000,350000] 
+f = FinalQ() 
+f.print(array,0)

@@ -1,0 +1,257 @@
+Name Nowshin Sumaiya
+ID 21301276
+Section 09
+Course CSE220
+Assignment 08
+
+
+#TASK 01
+
+def array_sort(array, idx=0) :
+  if(idx< len(array)-1) :
+    
+    store=idx+1
+    min_idx=store
+    min_idx = f_min(array,store,min_idx)
+    
+    if(array[min_idx]<array[idx]) :
+      a=array[idx]
+      array[idx] =array[min_idx]
+      array[min_idx]=a 
+    
+    return array_sort(array,idx+1)
+  else:
+    return array
+
+#------------------------------------
+def f_min(array,store,min_idx) :
+  if(store<len(array)):
+    
+    if(array[store]< array[min_idx]):
+      min_idx=store     
+    return f_min(array,store+1,min_idx )
+  
+  else:
+    return min_idx    
+#------------------------
+array=[9,-5,2,90,5,270]
+print("previous array:",array)
+print("Sorted array:",array_sort(array))
+
+
+#TASK 02
+
+def sort_arr(arr,idx=1) :
+  if(idx<len(arr)) :
+    store=arr[idx]
+    idx_s=idx-1
+    
+    while(arr[idx_s]> store and idx_s>=0) :
+      arr[idx_s+1]=arr[idx_s]
+      
+      idx_s=idx_s- 1
+    arr[idx_s+1]=store
+    
+    return sort_arr(arr,idx+1) 
+  
+  else:
+    return arr
+#-----------------------------
+array=[9,-5,2,90,5,270]
+print("previous array:",array)
+print("Sorted array:",sort_arr(array))
+
+
+
+
+#TASK 03
+
+class Node:
+  def __init__(self, ele, nxt):
+    self.element = ele
+    self.next = nxt
+#--------------------------------
+class Linked_list:
+  
+  def __init__(self, arr) :
+    self.head=None
+    
+    if type(arr)==list:
+      self.head=Node(arr[0], None )
+      save_h=self.head
+      
+      for x in range(1,len(arr)):
+        store=Node(arr[x],None)
+        save_h.next=store
+        save_h=save_h.next
+#--------------------------------  
+
+  def print_lst(self):
+    store_h=self.head
+    
+    while (store_h.next!= None) :
+      print(store_h.element,end=',')
+      store_h=store_h.next
+    
+    print(store_h.element)  
+
+#--------------------------------  
+  def bubble(self):
+    for y in range(len(array)-1):
+      head_1= self.head
+      temp=head_1.next
+      save=None
+      
+      while temp!=None:
+        if head_1.element>temp.element:
+          
+          if save==None:
+            save=head_1.next
+            temp=temp.next
+            save.next=head_1
+            head_1.next=temp
+            self.head=save
+          
+          else:
+            temp_2=temp
+            temp=temp.next
+            save.next=head_1.next
+            save=temp_2
+            temp_2.next=head_1
+            head_1.next=temp
+        else:
+          save=head_1
+          head_1=temp
+          temp=temp.next
+#TASK 04
+
+  
+  def selection_s(self):
+    store=self.head
+    
+    while store!=None:
+      min=store
+      n_val=store.next
+      
+      while n_val!=None:
+        if min.element>n_val.element:
+          min=n_val
+        n_val=n_val.next
+      
+     
+      z=store.element
+      store.element=min.element
+      min.element=z
+      store=store.next
+#--------------------------------
+array= [9,-5,2,90,5,270]
+print("previous array:",array)
+
+a=Linked_list(array)
+a.bubble()
+a.print_lst()
+
+
+#TASK 05
+
+class Node:
+  def __init__(self, element =None,next =None,previous =None) :
+    self.element =element
+    self.next =next
+    self.previous =previous
+
+#---------------------------------
+class Doubly_list:
+  def __init__(self, arr) :
+    if type(arr) is list :
+      
+      self.head = Node (arr[0])
+      save_head = self.head
+
+      
+      for a in range(1, len(arr)):
+        store =  Node(arr[a])
+        save_head.next =store
+        
+        store.previous =save_head
+        save_head =store
+
+    else:
+      self.head = arr
+#---------------------------------
+  
+  def print_list(self):
+    store = ''
+    head = self.head
+    save_h = head
+    
+    while save_h.next !=None :
+      store=store+str(save_h.element) + ','
+      save_h= save_h.next 
+    store =store+ str(save_h.element)
+    print(store)
+
+#---------------------------------
+array = [9,-5,2,90,5,270]
+head_1 = Doubly_list(array)
+
+print("Previous list:")
+head_1.print_list()
+head = head_1.head
+#---------------------------------
+def inser_sort(save_h = head):
+  if save_h == None:
+    head_1.print_list()
+
+  else:
+    node = save_h
+    
+    while node.previous != None and node.previous.element > node.element  :
+      store= node.element
+      node.element=node.previous.element
+      
+      node.previous.element= store
+      node = node.previous
+
+    inser_sort(save_h.next)
+
+head = head_1.head
+
+print("New sorted list:")
+inser_sort(head)
+
+
+
+#TASK 06
+
+
+def bin_ser(arr,first_idx,last_idx,num) :
+    mid_idx=(first_idx+last_idx)// 2
+    
+    if arr[mid_idx]>num :
+        return bin_ser(arr,first_idx,mid_idx-1,num)
+    
+    if arr[mid_idx] ==num :
+        return mid_idx 
+    
+    else:
+        return bin_ser(arr,mid_idx+1,last_idx,num)
+
+arr=[40,55,57,60,67,92,100]
+print(bin_ser(arr, 0,len(arr)-1,92))
+
+
+#TASK 07
+
+def Fibo_memo(num):
+    if num<0:
+        return "Invalid"
+    if num==1:
+        return 0
+    
+    if num==2:
+        return 1
+    
+    else:
+        return Fibo_memo(num-2)+ Fibo_memo(num-1)
+print(Fibo_memo(20))

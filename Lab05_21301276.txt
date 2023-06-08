@@ -1,0 +1,164 @@
+Name Nowshin Sumaiya
+ID 21301276
+Section 09
+Course CSE220
+Assignment 05
+
+
+
+#Array
+class arr_stack:
+  def __init__(self,len):
+    self.size_1=0
+    self.stack_1=[None]*len
+
+  def is_empty(self):
+    if self.size_1 !=0 :
+      return False
+    else:
+      return True 
+
+  def push(self,value):
+    self.stack_1 [self.size_1]=value
+    self.size_1=self.size_1 +1  
+
+  def peak(self):
+    return self.stack_1 [self.size_1 -1]    
+
+  def pop(self):
+    store=self.stack_1[self.size_1 -1]
+    self.stack_1[self.size_1 -1]= None
+    self.size_1 =self.size_1 - 1
+    return store 
+
+  def paranthesis_balancing(self,string) :
+    lst_1=arr_stack(len(string))
+    
+    
+    for a in range(len(string)):
+      if(string[a]=="[" or string[a]=="{" or string[a]=="("):
+        self.push(string[a])
+        lst_1.push(a)
+
+      elif(string[a]=="]" or string[a]=="}" or string[a]==")"):
+          if(self.size_1==0):
+            return  f'This expression is NOT correct. Error at character #{a+1} . "{string[a]}" - not opened'
+          save=self.peak()
+          self.pop()
+          
+          if(string[a]==']' and save=='['):
+            lst_1.pop()
+            continue
+          
+          if(string[a]=='}' and save=='{'):
+            lst_1.pop()
+            continue
+          
+          if(string[a]==')' and save=='('):
+            lst_1.pop()
+            
+            continue
+          
+          else:
+            return f'This expression is NOT correct. Error at character #{lst_1 .stack_1 [lst_1 .size_1 -1]+1} . "{save}" - not closed' 
+  
+          
+    
+    if(self.is_empty()==False):
+        return f'This expression is NOT correct'
+    else:
+        return f'This expression is correct'
+
+
+input_string=input("Enter an arithmetic expression as a String input: ")
+veriable= arr_stack(len(input_string))
+veriable.paranthesis_balancing(input_string)
+ 
+
+
+
+
+
+#-------------------------------------------
+#Linked list
+class Node:
+  def __init__(self,element,next) :
+    self.element=element
+    self.next=next
+
+
+class linked_stack:
+  def __init__(self) :
+    self.head=None
+
+  def is_empty(self) :
+        if self.head !=None:
+            return False
+        else:
+            return True
+  
+  def push(self,element):
+    
+    if(self.head !=None):
+      nd=Node(element,None)
+      nd.next=self.head
+      self.head=nd
+
+    else:
+      self.head=Node(element,None)
+      
+  def peak(self) :
+    return self.head. element  
+  
+  def pop(self) :
+    nd=Node(self.head.element,self.head.next )
+    self.head.next=None
+    self.head=nd.next
+    return nd.element
+  
+  
+
+  def checkBrackets(self,string) :
+    lst_1=linked_stack()
+    store=0
+    
+    for a in string:
+      if(a=="[" or a=="{" or a=="("):
+        self.push(a)
+        lst_1.push(store)
+      
+      elif(a=="]" or a=="}" or a==")"):
+          if(self.head==None):
+            return  f"The expression is NOT correct. Error at character #{store+1} . '{a}' - not opened"
+          save=self.peak()
+          self.pop()
+          
+          if(a=="]" and save=="["):
+            lst_1.pop()
+            
+            continue
+          
+          elif(a=='}' and save=="{"):
+            lst_1.pop()
+            continue
+          
+          elif(a==')' and save=="("):
+            lst_1.pop()
+            continue
+          
+          else:
+            return f"The expression is NOT correct. Error at character #{lst_1.head.element+1} . '{save}' - not closed"
+      
+      store=store+1   
+            
+    
+    if(self.is_empty()==False):
+      return f'This expression is NOT correct'
+    
+    else:
+      return f'This expression is correct'   
+ 
+
+input_string=input("Enter an arithmetic expression as a String input: ")
+veriable= linked_stack()
+veriable.checkBrackets(input_string)

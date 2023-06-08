@@ -1,0 +1,127 @@
+Name Nowshin Sumaiya
+ID 21301276
+Section 09
+Course CSE220
+Assignment 07
+
+
+#Task01
+class Key_index:
+  def __init__(self,arr):
+    self.min=arr[0]
+    max=arr[0]
+    
+    for x in arr:
+      if(x<self.min):
+        self.min=x
+      if(x>max):
+        max=x
+      
+       
+    if(self.min<0) :
+      for y in range(len(arr)):
+        arr[y]=arr[y]+ (self.min* -1)
+      self.save=[0]* (max+ (self.min*-1)+1)
+    
+    else:
+      self.save=[0]* (max+1)
+    for j in arr:
+      self.save[j]=self.save[j]+1
+ 
+
+#---------------------------
+  def search_val(self,val):
+      if(self.min<0 ):
+        if(val>=self.min and val<=(len(self.save)-(self.min*-1))):
+          if (len(self.save)<=(val+(self.min*-1))):
+            return False
+          
+          else:
+            if(self.save[val+(self.min*-1)]==0):
+              return False
+            else:
+              return True 
+        else:
+          return False   
+      else:
+        
+        if(self.save[val]!=0):
+          return True
+        else:
+          return False     
+
+#---------------------------
+  def sort_arr(self):
+    arr_size=0
+    for k in self.save:
+      if(k!=0):
+        arr_size=arr_size+k
+      else:
+        continue
+    store=[0]*arr_size
+    temp=0 
+    
+    if(self.min>=0) :   
+      
+      for z in range(len(self.save)) :
+        if(self.save [z]!=0):
+          for x in range(self.save[z]) :
+            store[temp]=z
+            temp=temp+1
+        else:
+          continue  
+    
+    elif(self.min<0) :
+      
+      for k in range(len(self.save)):
+        if(self.save[k]!=0):
+          
+          for x in range(self.save[k]):
+            store[temp] =k-(self.min*-1)
+            temp=temp+1
+        
+        else:
+          continue
+    return store           
+
+#---------------------------
+array=[100,-90,75,-10]
+print('Array:', array)
+flag=Key_index(array)
+print(flag.search_val(-90))
+flag.sort_arr()
+
+
+
+#--------------------
+#Task 02
+class hash_table:
+  def __init__(self,arr):
+    self.array=[None]*6
+    
+    for j in arr:
+      save=0
+      x=0
+      
+      for a in j:
+        if(a<="Z" and a>="A"):
+          if(a!="A"and a!="E" and a!="I" and a!="O" and a!="U"):
+            save=save+1
+        if(a<="9" and a>="0" ):
+          x= x+int(a)
+      store_val=((save*24 )+x)%9 
+      
+      if(self.array[store_val]==None):
+        self.array[store_val]=j
+      
+      
+      else:
+        while(self.array[store_val]!=None):
+          store_val=(store_val+1)% len(self.array)
+        
+        self.array[store_val]=j  
+    print(self.array)
+
+#----------------------------------------
+array=['ST1E89B8A32','ST1E89B8A22','ST1E89B8A21' ]
+h=hash_table(array)
